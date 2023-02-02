@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Inicio de Sesion";
+}
+
+<link href="~/Content/css/AccederStyle.css" rel="stylesheet" />
+
+<div class="contenedor">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form id="frmAcceder">
+
+            <input type="text" name="user" id="txtUser" placeholder="Usuario" autofocus />
+            <input type="password" name="password" id="txtPass" placeholder="Contraseña" required />
+
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Recordarme
+                </label>
+            </div>
+
+            <input type="submit" class="btn btn-success" value="Entrar" />
+
+        </form>
+        <a href="#" class="forgot-password">
+            Olvido la contraseña?
+        </a>
+    </div>
+</div>s
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#frmAcceder").submit(function (e) {
+                e.preventDefault();
+                url = "@Url.Content("~/Acceder/Enter")"
+                parametros = $(this).serialize();
+
+                $.post(url, parametros, function (data) {
+                    if (data == "1") {
+                        document.location.href = "@Url.Content("~/Acceder/HomePage")";
+                    }
+                    else {
+                        alert(data)
+                    }
+                })
+            })
+        })
+    </script>
+}
+
+
+
